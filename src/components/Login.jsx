@@ -76,7 +76,9 @@ const Login = () => {
                     background: "#17a2b8",
                     fontWeight: 500,
                   }}
-                  onClick={login}
+                  onClick={() => {
+                    navigate("/home");
+                  }}
                 >
                   Log in
                 </Button>{" "}
