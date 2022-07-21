@@ -14,12 +14,6 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (localStorage.getItem("user-info")) {
-      navigate.push("/add");
-    }
-  }, []);
-
   async function signUp() {
     let item = { firstName, lastName, email, username, password };
     console.warn(item);
@@ -33,9 +27,16 @@ const SignUp = () => {
       body: JSON.stringify(item),
     });
     result = await result.json();
-    localStorage.setItem("user-info", JSON.stringify(result));
-    navigate.push("/add");
+    localStorage.getItem("user-info", JSON.stringify(result));
+    navigate("/login");
   }
+
+  useEffect(() => {
+    if (localStorage.getItem("user-info")) {
+      navigate("/home");
+    }
+  }, []);
+
   return (
     <>
       <div className="container mt-5 col-lg-8">

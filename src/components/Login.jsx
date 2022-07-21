@@ -7,14 +7,14 @@ import SignImg from "./SignImg";
 import { useNavigate } from "react-router-dom";
 
 const Login = () => {
-  const [data, setData] = useState([]);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
     if (localStorage.getItem("user-info")) {
-      navigate.push("/add");
+      navigate("/home");
+      JSON.parse(localStorage.getItem("user-info"));
     }
   }, []);
 
@@ -31,7 +31,7 @@ const Login = () => {
     });
     result = await result.json();
     localStorage.setItem("user-info", JSON.stringify(result));
-    navigate.push("/add");
+    navigate("/home");
   }
   return (
     <>
@@ -76,9 +76,7 @@ const Login = () => {
                     background: "#17a2b8",
                     fontWeight: 500,
                   }}
-                  onClick={() => {
-                    navigate("/home");
-                  }}
+                  onClick={login}
                 >
                   Log in
                 </Button>{" "}
