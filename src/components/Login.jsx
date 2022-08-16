@@ -19,7 +19,6 @@ const Login = () => {
     message: "Please Login",
     variant: "info",
   });
-  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -99,6 +98,7 @@ const Login = () => {
       setLoading(false);
     }
   };
+
   return (
     <>
       <div className="container mt-5 col-lg-8">

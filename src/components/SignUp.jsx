@@ -12,23 +12,44 @@ const SignUp = () => {
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setLoading] = useState(false);
+  const [loginHint, setLoginHint] = useState({
+    message: "Please Login",
+    variant: "info",
+  });
   const navigate = useNavigate();
 
   async function signUp() {
     let item = { firstName, lastName, email, username, password };
     console.warn(item);
-
-    let result = await fetch("https://notingapp.herokuapp.com/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      body: JSON.stringify(item),
-    });
-    result = await result.json();
-    localStorage.getItem("user-info", JSON.stringify(result));
-    navigate("/login");
+    try {
+      let result = await fetch("https://notingapp.herokuapp.com/auth/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: JSON.stringify(item),
+      });
+      result = await result.json();
+      if (result.error || !result?.data?.user) {
+        throw new Error(result.error || result.message);
+      } else {
+        setLoading(false);
+        setLoginHint({
+          message: result.message,
+          variant: "success",
+        });
+        localStorage.getItem("user-info", JSON.stringify(result));
+        navigate("/login");
+      }
+    } catch (e) {
+      setLoginHint({
+        message: e.message,
+        variant: "danger",
+      });
+      setLoading(false);
+    }
   }
 
   useEffect(() => {
@@ -108,6 +129,9 @@ const SignUp = () => {
                     fontWeight: 500,
                   }}
                   onClick={signUp}
+                  disabled={
+                    !(firstName && lastName && username && email && password)
+                  }
                 >
                   Sign UP
                 </Button>{" "}
@@ -129,7 +153,11 @@ const SignUp = () => {
             </Card.Body>
           </Card>
         </section>
-        <Alert variant="info">Please Sign Up</Alert>
+        {isLoading ? (
+          <Alert variant="dark">Loading...</Alert>
+        ) : (
+          <Alert variant={signUp.variant}>{loginHint.message}</Alert>
+        )}
       </div>
     </>
   );
