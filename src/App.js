@@ -1,9 +1,10 @@
 import "./App.css";
-import Header from "./components/Header";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Login from "./components/Login";
 import { Routes, Route } from "react-router-dom";
 import SignUp from "./components/SignUp";
+import Home from "./features/home";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -11,6 +12,8 @@ function App() {
       <Routes>
         <Route path="/" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/home" element={<ProtectedRoute comp={Home} />} />
+        {/* <Route path="/home" element={<Home />} */}
       </Routes>
     </>
   );
