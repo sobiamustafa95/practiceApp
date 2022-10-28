@@ -12,21 +12,27 @@ const Header = () => {
   //   LogOut function
   const logOut = () => {
     localStorage.clear();
-    navigate.push("/login");
+    navigate("/login");
   };
   return (
     <>
       <Navbar bg="light" variant="light" style={{ color: "black" }}>
         <Container>
-          <Navbar.Brand>{user.username}</Navbar.Brand>
+          <Navbar.Brand>user Name</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={logOut}>Log Out</Nav.Link>
-            <Nav.Link href="#createNote">Create Notes</Nav.Link>
+            <Nav.Link
+              onClick={() => {
+                navigate("/home/createNotes");
+              }}
+            >
+              Create Notes
+            </Nav.Link>
           </Nav>
           <Nav>
-            <NavDropdown title={user.firstName}>
+            {/*<NavDropdown title={user.firstName}>
               <NavDropdown.Item onClick={logOut}> Logout</NavDropdown.Item>
-            </NavDropdown>
+  </NavDropdown>*/}
           </Nav>
         </Container>
       </Navbar>
