@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 const Header = () => {
   const navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem("user-info"));
+  console.log(user.firstName);
 
   //   LogOut function
   const logOut = () => {
