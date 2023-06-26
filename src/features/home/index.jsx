@@ -1,6 +1,6 @@
 import React from "react";
 import Header from "../../components/Header";
-import TodoCard from "../../components/Card";
+// import TodoCard from "../../components/Card";
 const Home = () => {
   return (
     <>
@@ -11,9 +11,7 @@ const Home = () => {
       >
         <h3>user Notes</h3>
       </div>
-      <div className="container col-lg-8 mt-3">
-        <TodoCard />
-      </div>
+      <div className="container col-lg-8 mt-3">{/*<TodoCard />*/}</div>
     </>
   );
 };

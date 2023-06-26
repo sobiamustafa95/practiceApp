@@ -5,10 +5,10 @@ import Nav from "react-bootstrap/Nav";
 import { NavDropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
+const Header = (props) => {
   const navigate = useNavigate();
   let user = JSON.parse(localStorage.getItem("user-info"));
-  console.log(user.firstName);
+  console.log(props.firstName);
 
   //   LogOut function
   const logOut = () => {
@@ -19,7 +19,7 @@ const Header = () => {
     <>
       <Navbar bg="light" variant="light" style={{ color: "black" }}>
         <Container>
-          <Navbar.Brand>user Name</Navbar.Brand>
+          <Navbar.Brand>{props.firstName}</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link onClick={logOut}>Log Out</Nav.Link>
             <Nav.Link

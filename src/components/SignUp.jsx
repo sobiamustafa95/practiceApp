@@ -14,7 +14,7 @@ const SignUp = () => {
   const [password, setPassword] = useState("");
   const [isLoading, setLoading] = useState(false);
   const [loginHint, setLoginHint] = useState({
-    message: "Please Login",
+    message: "Please SignUp",
     variant: "info",
   });
   const navigate = useNavigate();
@@ -56,7 +56,7 @@ const SignUp = () => {
     if (localStorage.getItem("user-info")) {
       navigate("/home");
     }
-  }, []);
+  }, [navigate]);
 
   return (
     <>
